@@ -37,6 +37,8 @@
 
 字段说明见 [plugin-catalog.md](https://github.com/rinchao0721/Melodia/blob/dev/docs/plugin-catalog.md)。
 
+源码在本仓库的插件，需提交 `<插件目录>/<插件目录名>.melodiaplugin` 产物（`download.url` 中的 tag 格式为 `<目录名>-v<version>`），合并后会自动发布对应的 GitHub Release。
+
 计算哈希（Windows）：
 
 ```powershell
