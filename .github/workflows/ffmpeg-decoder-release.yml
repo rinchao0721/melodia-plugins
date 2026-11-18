@@ -1,0 +1,71 @@
+name: 构建 FFmpeg 解码组件
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 创建 Release
+        type: boolean
+        default: false
+      revision:
+        description: 组件修订号
+        type: string
+        default: '1'
+
+permissions:
+  contents: write
+
+env:
+  MEDIA3_VERSION: '1.11.1'
+  NDK_VERSION: '26.3.11579264'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装 NDK 与构建工具
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build yasm nasm
+          yes | "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" "ndk;${NDK_VERSION}" "cmake;3.22.1"
+          echo "NDK_PATH=${ANDROID_HOME}/ndk/${NDK_VERSION}" >> "$GITHUB_ENV"
+          echo "${ANDROID_HOME}/cmake/3.22.1/bin" >> "$GITHUB_PATH"
+
+      - name: 编译 libffmpegJNI.so
+        run: bash ffmpeg-decoder/build.sh "$NDK_PATH" "$PWD/out"
+
+      - name: 校验产物
+        run: bash ffmpeg-decoder/verify_so.sh "$NDK_PATH" "$PWD/out"
+
+      - name: 整理产物并生成清单
+        env:
+          REVISION: ${{ inputs.revision || '1' }}
+        run: |
+          mkdir -p dist
+          for abi in arm64-v8a armeabi-v7a x86_64; do
+            cp "out/${abi}/libffmpegJNI.so" "dist/libffmpegJNI-${abi}.so"
+          done
+          python3 ffmpeg-decoder/make_manifest.py --so-dir dist --revision "$REVISION" \
+            --output dist/ffmpeg-decoder-manifest.json
+          ls -l dist
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: ffmpeg-decoder
+          path: dist/*
+          if-no-files-found: error
+
+      - name: 创建 Release
+        if: ${{ inputs.publish }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVISION: ${{ inputs.revision || '1' }}
+        run: |
+          tag="ffmpeg-decoder-v${MEDIA3_VERSION}-${REVISION}"
+          gh release create "$tag" dist/* \
+            --title "FFmpeg 解码组件 ${MEDIA3_VERSION}-${REVISION}" \
+            --notes "media3 ${MEDIA3_VERSION} decoder_ffmpeg 原生库，jniAbi=1。"
