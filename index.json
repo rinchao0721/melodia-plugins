@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updatedAt": "2026-11-14",
+  "updatedAt": "2026-11-18",
   "plugins": [
     {
       "id": "com.melodia.discordpresence",
@@ -78,6 +78,31 @@
         "url": "https://github.com/rinchao0721/melodia-plugins/releases/download/fluid-player-v1.0.1/fluid-player.melodiaplugin",
         "sha256": "cdd69b3704c7beb56b9ecbc5b39cd3a8f14f8d72a62faa5a2019710feeb7394d",
         "size": 3316
+      }
+    }
+  ],
+  "components": [
+    {
+      "id": "ffmpeg-decoder",
+      "version": "1.11.1-1",
+      "jniAbi": 1,
+      "minAppVersion": "2.4.0",
+      "files": {
+        "arm64-v8a": {
+          "url": "https://github.com/rinchao0721/melodia-plugins/releases/download/ffmpeg-decoder-v1.11.1-1/libffmpegJNI-arm64-v8a.so",
+          "sha256": "4e83548d11eaa3200caf7fe31635372802ddc9632e6af753f268fa0c862bd318",
+          "size": 1074968
+        },
+        "armeabi-v7a": {
+          "url": "https://github.com/rinchao0721/melodia-plugins/releases/download/ffmpeg-decoder-v1.11.1-1/libffmpegJNI-armeabi-v7a.so",
+          "sha256": "ff56e48eeec90a4e8ad30277abb1ebdb539ad3f35fa2526d3c6d620309b033a1",
+          "size": 1000520
+        },
+        "x86_64": {
+          "url": "https://github.com/rinchao0721/melodia-plugins/releases/download/ffmpeg-decoder-v1.11.1-1/libffmpegJNI-x86_64.so",
+          "sha256": "7673fe25c127c57648aa7cfee23004ba89742f3e04eafbbfff2d8b554961d918",
+          "size": 1078776
+        }
       }
     }
   ]
