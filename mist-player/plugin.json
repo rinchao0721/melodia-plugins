@@ -1,0 +1,21 @@
+{
+  "format": 2,
+  "kind": "sandbox",
+  "id": "com.melodia.mistplayer",
+  "name": "平板类 Apple Music 播放页",
+  "version": "1.1.0",
+  "author": "Melodia",
+  "description": "宿主原生模糊封面叠调色板光斑，大圆角封面带彩色投影，歌词左对齐、当前行放大、其余行模糊；平板宽屏、竖屏、歌词页与迷你播放器统一风格。需要 API 1.12 宿主。",
+  "apiVersion": "1.12",
+  "platforms": [
+    "android"
+  ],
+  "contributes": {
+    "playerLayouts": {
+      "android.fullPlayerWide": "ui/wide.json",
+      "android.fullPlayer": "ui/player.json",
+      "android.lyrics": "ui/lyrics.json",
+      "android.miniPlayer": "ui/mini.json"
+    }
+  }
+}
