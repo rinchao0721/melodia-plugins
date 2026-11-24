@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updatedAt": "2026-11-18",
+  "updatedAt": "2026-11-24",
   "plugins": [
     {
       "id": "com.melodia.discordpresence",
@@ -78,6 +78,33 @@
         "url": "https://github.com/rinchao0721/melodia-plugins/releases/download/fluid-player-v1.0.1/fluid-player.melodiaplugin",
         "sha256": "cdd69b3704c7beb56b9ecbc5b39cd3a8f14f8d72a62faa5a2019710feeb7394d",
         "size": 3316
+      }
+    },
+    {
+      "id": "com.melodia.mistplayer",
+      "name": "平板类 Apple Music 播放页",
+      "version": "1.1.0",
+      "kind": "sandbox",
+      "author": "Melodia",
+      "description": "模糊封面叠调色板光晕背景，大圆角封面带彩色投影，歌词左对齐、当前行放大、其余行模糊；平板宽屏、竖屏、歌词页与迷你播放器统一风格。需要 API 1.12 宿主。",
+      "platforms": ["android"],
+      "apiVersion": "1.12",
+      "permissions": [],
+      "source": "https://github.com/rinchao0721/melodia-plugins/tree/mist-player-v1.1.0/mist-player",
+      "screenshots": [
+        {
+          "url": "https://raw.githubusercontent.com/rinchao0721/melodia-plugins/34ea885bd850be533646d3f180aeca55010405c4/mist-player/screenshots/wide.jpg",
+          "label": "平板宽屏"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/rinchao0721/melodia-plugins/34ea885bd850be533646d3f180aeca55010405c4/mist-player/screenshots/sidebar.jpg",
+          "label": "平板侧栏"
+        }
+      ],
+      "download": {
+        "url": "https://github.com/rinchao0721/melodia-plugins/releases/download/mist-player-v1.1.0/mist-player.melodiaplugin",
+        "sha256": "c80ab4ea667abb12e984c0183b7ab6c26cd97a645247698fd98f7ffe477e455a",
+        "size": 5376
       }
     }
   ],
