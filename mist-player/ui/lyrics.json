@@ -1,0 +1,42 @@
+{
+  "frame": {
+    "canvas": "background/mist.js",
+    "canvasColors": {
+      "coverBase": "cover.base",
+      "coverAccent": "cover.accent"
+    },
+    "sungColor": {
+      "light": "#FF1C1C1E",
+      "dark": "#FFFFFFFF"
+    },
+    "unsungColor": {
+      "light": "#6B1C1C1E",
+      "dark": "#73FFFFFF"
+    },
+    "harmonySungColor": {
+      "light": "#B31C1C1E",
+      "dark": "#BFFFFFFF"
+    },
+    "harmonyUnsungColor": {
+      "light": "#331C1C1E",
+      "dark": "#38FFFFFF"
+    },
+    "translationColor": {
+      "light": "#8C1C1C1E",
+      "dark": "#94FFFFFF"
+    },
+    "romanizationColor": {
+      "light": "#8C1C1C1E",
+      "dark": "#94FFFFFF"
+    },
+    "lyricsStyle": {
+      "fontScale": 1.1,
+      "align": "start",
+      "activeScale": 1.08,
+      "inactiveBlur": 1.2,
+      "lineSpacing": 1.15
+    },
+    "canvasCover": true
+  },
+  "layout": "host"
+}

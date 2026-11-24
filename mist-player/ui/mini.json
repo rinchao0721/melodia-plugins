@@ -1,0 +1,47 @@
+{
+  "frame": {
+    "background": {
+      "gradient": [
+        {
+          "mix": [
+            {
+              "adjust": "cover.base",
+              "saturation": 1.6
+            },
+            {
+              "light": "#FFFFFF",
+              "dark": "#000000"
+            }
+          ],
+          "amount": {
+            "light": 0.72,
+            "dark": 0.55
+          }
+        },
+        {
+          "mix": [
+            {
+              "adjust": "cover.accent",
+              "hue": 28,
+              "saturation": 1.4
+            },
+            {
+              "light": "#FFFFFF",
+              "dark": "#000000"
+            }
+          ],
+          "amount": {
+            "light": 0.8,
+            "dark": 0.68
+          }
+        }
+      ],
+      "angle": 0
+    },
+    "contentColor": {
+      "light": "#1C1C1E",
+      "dark": "#FFFFFF"
+    }
+  },
+  "layout": "host"
+}
