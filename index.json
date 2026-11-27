@@ -118,6 +118,7 @@
       "version": "1.6.0",
       "kind": "sandbox",
       "author": "leesing",
+      "authorUrl": "https://github.com/leesing",
       "description": "官方下载链接不可用或降级时，向可配置的第三方接口再取一条直链，按所选音质回退并提示实际结果",
       "platforms": ["desktop", "android"],
       "apiVersion": "1.12",
