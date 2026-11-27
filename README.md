@@ -17,6 +17,7 @@
   "version": "1.0.0",
   "kind": "sandbox",
   "author": "作者",
+  "authorUrl": "https://github.com/作者",
   "description": "一句话说明",
   "platforms": ["desktop", "android"],
   "apiVersion": "1.0",
@@ -33,7 +34,7 @@
 }
 ```
 
-`id`、`version`、`kind` 要和包内 `plugin.json` 一致，否则应用会拒绝安装。`download.url` 只能是 https，`size` 是插件包的字节数；沙盒插件不超过 10MB，原生插件不超过 200MB。`screenshots` 可选，用于在目录网页展示预览图（仅限 https，可填图片地址字符串或 `{ "url": "...", "label": "说明" }`）。
+`id`、`version`、`kind` 要和包内 `plugin.json` 一致，否则应用会拒绝安装。`download.url` 只能是 https，`size` 是插件包的字节数；沙盒插件不超过 10MB，原生插件不超过 200MB。`authorUrl` 可选，仅限 https，用于在目录网页和 Release 页把作者名做成链接。`screenshots` 可选，用于在目录网页展示预览图（仅限 https，可填图片地址字符串或 `{ "url": "...", "label": "说明" }`）。
 
 字段说明见 [plugin-catalog.md](https://github.com/rinchao0721/Melodia/blob/dev/docs/plugin-catalog.md)。
 

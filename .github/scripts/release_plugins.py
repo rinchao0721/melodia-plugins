@@ -26,6 +26,8 @@ class PluginSpec:
     name: str
     version: str
     description: str
+    author: str
+    author_url: str
     dir_name: str
     tag: str
     filename: str
@@ -96,6 +98,29 @@ def parse_plugin_entry(
         else:
             required_strings[field] = value.strip()
 
+    author = ""
+    if "author" in entry:
+        raw_author = entry.get("author")
+        if not isinstance(raw_author, str) or not raw_author.strip():
+            errors.append(f"{label}: 字段 'author' 必须是非空字符串")
+        else:
+            author = raw_author.strip()
+
+    author_url = ""
+    if "authorUrl" in entry:
+        raw_author_url = entry.get("authorUrl")
+        if not isinstance(raw_author_url, str) or not raw_author_url.strip():
+            errors.append(f"{label}: 'authorUrl' 必须是合法的 https URL")
+        else:
+            candidate_url = raw_author_url.strip()
+            parsed_author_url = urlparse(candidate_url)
+            if parsed_author_url.scheme != "https" or not parsed_author_url.netloc:
+                errors.append(f"{label}: 'authorUrl' 必须是合法的 https URL")
+            else:
+                author_url = candidate_url
+        if not author:
+            errors.append(f"{label}: 存在 'authorUrl' 时必须提供 'author'")
+
     download = entry.get("download")
     dl_url = ""
     expected_sha256 = ""
@@ -160,6 +185,8 @@ def parse_plugin_entry(
             name=required_strings["name"],
             version=required_strings["version"],
             description=required_strings["description"],
+            author=author,
+            author_url=author_url,
             dir_name=dir_name,
             tag=tag,
             filename=filename,
@@ -233,10 +260,17 @@ def verify_artifact(plugin: PluginSpec) -> list[str]:
 
 def create_release(plugin: PluginSpec, repo: str, target_sha: str) -> str | None:
     title = f"{plugin.name} {plugin.version}"
-    notes = (
-        f"{plugin.description}\n\n"
+    lines = [plugin.description, ""]
+    if plugin.author:
+        escaped_author = plugin.author.replace("[", "\\[").replace("]", "\\]")
+        if plugin.author_url:
+            lines.append(f"作者：[{escaped_author}]({plugin.author_url})")
+        else:
+            lines.append(f"作者：{escaped_author}")
+    lines.append(
         f"源码：[{plugin.dir_name}](https://github.com/{repo}/tree/{plugin.tag}/{plugin.dir_name})"
     )
+    notes = "\n".join(lines)
     try:
         code, stdout, stderr = run_gh(
             [

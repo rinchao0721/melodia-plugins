@@ -183,6 +183,7 @@ h1 { margin: 4px 0 8px; font-size: clamp(30px, 6vw, 46px); line-height: 1.15; fo
 .facts { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 4px 12px; margin: 0 0 12px; }
 .facts dt { color: var(--text-3); }
 .facts dd { margin: 0; overflow-wrap: anywhere; }
+.facts dd a { color: var(--text-2); text-underline-offset: 3px; }
 .facts ul { margin: 0; padding: 0; list-style: none; }
 .shots { display: flex; gap: 10px; overflow-x: auto; padding: 2px 0 4px; }
 .shot {
@@ -254,6 +255,7 @@ h1 { margin: 4px 0 8px; font-size: clamp(30px, 6vw, 46px); line-height: 1.15; fo
   .get:hover { background: var(--accent); color: var(--on-accent); }
   .get:hover .arrow { transform: translateY(2px); }
   .theme-toggle:hover { background: var(--surface-strong); color: var(--text); }
+  .facts dd a:hover { color: var(--text); }
 }
 @media (max-width: 640px) {
   .pane { padding: 18px 14px; }
@@ -483,6 +485,19 @@ function detail(plugin) {
     facts.append(dt, dd);
     return { dt, dd };
   };
+  const author = typeof plugin.author === 'string' ? plugin.author.trim() : '';
+  if (author) {
+    const authorUrl = typeof plugin.authorUrl === 'string' ? plugin.authorUrl.trim() : '';
+    if (isHttps(authorUrl)) {
+      const link = el('a', '', author);
+      link.href = authorUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      add('作者', link);
+    } else {
+      add('作者', author);
+    }
+  }
   add('平台', (plugin.platforms?.length ? plugin.platforms.map(key => PLATFORMS[key] ?? key) : ['全部平台']).join('、'));
   if (plugin.minAppVersion) add('应用版本', `${plugin.minAppVersion} 及以上`);
   const permissions = el('ul');
