@@ -1,0 +1,107 @@
+{
+  "format": 2,
+  "id": "com.melodia.downloadbridge",
+  "name": "备用下载源",
+  "version": "1.6.0",
+  "author": "leesing",
+  "description": "兼容星海 LX v3.2.20 与 Melodia API 1.12：按 Android 选择的档位取链；后端偷偷降档时继续上探母带/全景声；取到直链时可提示开始下载，进度与完成提示由 Melodia 自己显示",
+  "minAppVersion": "2.5.0-beta.2",
+  "kind": "sandbox",
+  "platforms": ["desktop", "android"],
+  "apiVersion": "1.12",
+  "permissions": ["network", "downloadSource", "ui.notify"],
+  "network": {
+    "hosts": ["yy1.zddyr.top", "yy.zddyr.top", "music-api.gdstudio.xyz", "api.injahow.cn", "api.qijieya.cn"]
+  },
+  "contributes": {
+    "downloadSources": [
+      { "id": "main", "name": "第三方下载源" }
+    ],
+    "settings": [
+      {
+        "id": "provider",
+        "type": "select",
+        "title": "接口顺序",
+        "default": "auto",
+        "options": [
+          { "value": "auto", "label": "自动（星海 > 自定义 > GD > Meting 两个镜像）" },
+          { "value": "xinghai", "label": "只用星海后端" },
+          { "value": "custom", "label": "只用自定义接口" },
+          { "value": "gdstudio", "label": "只用 GD 接口" },
+          { "value": "inj", "label": "只用 Meting（injahow）" },
+          { "value": "qijieya", "label": "只用 Meting（qijieya）" }
+        ]
+      },
+      {
+        "id": "xhQuality",
+        "type": "select",
+        "title": "星海音质上限",
+        "default": "auto",
+        "options": [
+          { "value": "auto", "label": "跟下载档位走" },
+          { "value": "320k", "label": "最高 320 kbps" },
+          { "value": "128k", "label": "最高 128 kbps" }
+        ]
+      },
+      {
+        "id": "preferMaster",
+        "type": "toggle",
+        "title": "后端降档时继续上探母带/全景声（推荐）",
+        "default": true
+      },
+      {
+        "id": "minQuality",
+        "type": "select",
+        "title": "最低可接受音质（低于它宁可下载失败）",
+        "default": "auto",
+        "options": [
+          { "value": "auto", "label": "不限制，能下就下" },
+          { "value": "320k", "label": "至少 320 kbps" },
+          { "value": "flac", "label": "只要无损 FLAC" }
+        ]
+      },
+      {
+        "id": "xhLicense",
+        "type": "text",
+        "title": "星海卡密（可选，填了才走需要授权的音源）",
+        "default": ""
+      },
+      {
+        "id": "endpoint",
+        "type": "text",
+        "title": "自定义接口模板（可用 {id} {br} {source} {quality} {title} {artist} {cookie}）",
+        "default": ""
+      },
+      {
+        "id": "br",
+        "type": "select",
+        "title": "公开接口优先音质",
+        "default": "auto",
+        "options": [
+          { "value": "auto", "label": "跟下载档位走" },
+          { "value": "128", "label": "128 kbps" },
+          { "value": "320", "label": "320 kbps" },
+          { "value": "999", "label": "最高（可能拿到 flac）" }
+        ]
+      },
+      {
+        "id": "cookie",
+        "type": "text",
+        "title": "公开接口 Cookie（可选，部分接口支持按账号取链）",
+        "default": ""
+      },
+      {
+        "id": "debug",
+        "type": "toggle",
+        "title": "取不到链接时提示原因",
+        "default": false
+      },
+      {
+        "id": "notifyStart",
+        "type": "toggle",
+        "title": "取到直链时提示开始下载",
+        "default": true
+      }
+    ]
+  }
+}
